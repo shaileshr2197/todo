@@ -1,0 +1,13 @@
+<app-sidenav>
+<router-outlet></router-outlet>
+<!-- <button (click)="subscribeToNotifications()">subscribe</button> -->
+</app-sidenav>
+<div class="snackbar show" *ngIf="snackBar | async">
+    {{snackBar | async}}
+</div>
+<ng-container *ngIf="loader$ | async">
+    <div class="backdrop open"></div>
+    <div class="lds-ring">
+        <div *ngFor="let n of [1,2,3,4]"></div>
+    </div>
+</ng-container>

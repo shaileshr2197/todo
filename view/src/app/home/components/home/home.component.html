@@ -1,0 +1,15 @@
+<!-- <app-signin></app-signin> -->
+<app-activities (editTask)="edit($event)"></app-activities>
+<button class="add-task" mat-fab color="primary" (click)="toggle()">+</button>
+<span class="backdrop" (click)="toggle()" [ngClass]="{'show':showOverlay}"></span>
+<div class="overlay add-item" [ngClass]="{'show':showOverlay}">
+    <form action="" (submit)="addTask()" [formGroup]="task">
+        <input type="text" formControlName="name" placeholder="">
+        <div class="alarm">
+            <em></em>
+            <input [owlDateTime]="dt1" readonly formControlName="due" [owlDateTimeTrigger]="dt1" placeholder="Set reminder">
+            <owl-date-time #dt1></owl-date-time>
+        </div>
+        <button>{{formEdit?.item ? 'Save' : 'Add'}}</button>
+    </form>
+</div>

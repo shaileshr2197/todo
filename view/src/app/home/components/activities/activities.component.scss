@@ -1,0 +1,158 @@
+
+@import './../../../../assets/scss/variables.scss';
+
+.desc{
+    color: $secondarycolor;
+    font-size: 1rem;
+}
+table{
+    width: 100%;
+    border-spacing: 0;
+    margin-top: 1rem;
+    input[type='checkbox']{
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+    th{
+        text-align: left;
+        height: 3rem;
+        font-size: 1.5rem;
+    }
+    tbody:not(.no-bx){
+        box-shadow:$box-shadow;
+        border-radius: 0.25rem;
+        &.scale{
+            animation: scale 1s ease;
+        }
+    }
+    tr{
+        td{
+            background-color: $white;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            &:first-child{
+                text-align: center;
+                border-right: 1px dashed $secondarycolor;
+            }
+            &:nth-child(3){
+                text-align: center;
+            }
+            .title{
+                font-size: 1.25rem;
+                font-weight: 500;
+            }
+            img{
+                margin: 0 2rem;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+.completed{
+    display: none;
+    transition: 0.5s;
+    tr td{
+        background-color: lighten($secondarycolor,90);
+    }
+    &.open{
+        display: block;
+        opacity: 0.7;
+        transition: 0.5s;
+    }
+    &:not(.open){
+        pointer-events: none;
+    }
+}
+.toggler{
+    font-size: 1.25rem;
+    color: $secondarycolor;
+    font-weight: 400;
+    margin: 1rem 0;
+    em{
+        transition: 0.4s;
+        display: inline-block;
+        vertical-align: middle;
+        &.open{
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.multi-select{
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    background-color: $primarycolor;
+    padding: 1rem;
+    left: 0;
+    right: 0;
+    button{
+        color: #fff;
+        font-size: 1.5rem;
+        &:last-child{
+            float: right;
+            position: relative;
+            top:4px;
+            em{
+                &::after{
+                    content: "\eb7b";
+                    font-family: 'remixicon';
+                    position: absolute;
+                    top:-7px;
+                    left: 6px;
+                }
+            }
+        }
+    }
+}
+
+.cls-delete{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    box-shadow: 0px 6px 6px 6px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    text-align: center;
+    background: $white;
+    button{
+        font-size: 2rem;
+    }
+}
+td .ri-check-line{
+    box-shadow: $box-shadow;
+    padding: 0.5rem;
+    border-radius: 100%;
+    color: $secondarycolor;
+}
+.marked{
+    background-color: $primarycolor;
+    .ri-check-line{
+        color: $white;
+        background-color: $primarycolor;
+    }
+}
+.no-data{
+    margin: 2rem 0;
+    text-align: center;
+    img{
+        width: 100%;
+    }
+}
+@media screen and (min-width:320px) and (max-width:480px) {
+   .desc,.title{
+       margin-bottom: 0.5rem;
+   }
+   table tr td{
+       padding: 0.5rem 1rem;
+   }
+}
+
+@keyframes scale {
+    0%,100%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    } 
+}

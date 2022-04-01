@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";
+@import './assets/scss/variables.scss';
+@import './assets/scss/fonts.scss';
+@import './assets/scss/icons.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "PoppinsRegular", "Helvetica Neue", sans-serif; }
+
+td .mat-checkbox-frame{
+    border-radius: 100%;
+    border-width: 1px;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+button{
+    background: none;
+    border: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    color: $primarycolor;
+}
+
+input{
+    border: 0;
+    padding: 0.75rem 0.5rem;
+    background-color: lighten($secondarycolor,90%);
+    border-bottom: 1px solid $secondarycolor;
+    margin-right: 1rem;
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    &:focus,&:active{
+        outline: none;
+        box-shadow: none;
+        background-color: lighten($primarycolor,50%);
+        border-bottom: 1px solid $primarycolor;
+        transition: 0.3s ease;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:480px) {
+    html{
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,53 @@
+<ng-container *ngIf="(enableDelete | async) == 'on'">
+    <div class="multi-select">
+        <button (click)="cancelDelete()"><em class="ri-close-line"></em></button>
+        <button (click)="markAll()"><em class="ri-check-line"></em></button>
+    </div>
+    <div class="cls-delete">
+        <button (click)="confirmDelete()"><em class="ri-delete-bin-6-line"></em></button>
+    </div>
+</ng-container>
+<!-- <label for="">
+    <input type="text" class="search-task" [ngModel]=>
+</label> -->
+<div class="no-data" *ngIf="(items | async)?.todo?.length == 0 && (items | async)?.completed?.length == 0">
+    <img src="/assets/images/no-data.jpg" alt="">
+    <p class="desc">No tasks here yet</p>
+</div>
+<ng-container *ngTemplateOutlet="tableContent;context:{data:(items | async)?.todo,type:'todo'}"></ng-container>
+<button class="toggler" (click)="toggle()" *ngIf="(items | async)?.completed?.length != 0"><em class="ri-arrow-down-s-line ri-lg" [ngClass]="{'open':!toggled}"></em> completed</button>
+<ng-container *ngTemplateOutlet="tableContent;context:{data:(items | async)?.completed,type:'completed'}"></ng-container>
+
+<ng-template #tableContent let-data="data" let-type="type">
+    <table [ngClass]="{'open':toggled,'completed':type=='completed'}">
+        <ng-container *ngFor="let item of data; let key = index">
+            <tbody class="no-bx" *ngIf="key != 0"><tr height="20"></tr></tbody>
+            <tbody cellspacing="0" appLongPress (mouseLongPress)="toggleDelete('on')">
+                <tr *ngIf="(enableDelete | async) !== 'on'">
+                    <td width="10%">
+                        <input type="checkbox" [disabled]="type === 'completed'" (change)="completed(key,item)">
+                    </td>
+                    <td width="60%" (click)="edit(key,item,'todo')">
+                        <p class="title">{{item.name}}</p>
+                        <span class="desc">{{item.due | dueTime}}</span>
+                    </td>
+                    <td width="30%" *ngIf="type !== 'completed'">
+                        <img src="/assets/images/morning.png" [appDueTime]="item.due" alt="morning" height="30px" width="30px">
+                    </td>
+                </tr>
+                <tr [ngClass]="{'marked':item.status === 'marked'}" *ngIf="(enableDelete | async) === 'on'" (click)="markDelete(key,type)">
+                    <td width="10%">
+                        <input type="checkbox" disabled>
+                    </td>
+                    <td width="60%">
+                        <p class="title">{{item.name}}</p>
+                        <span class="desc">{{item.due | dueTime}}</span>
+                    </td>
+                    <td width="30%">
+                        <em class="ri-check-line"></em>
+                    </td>
+                </tr>
+            </tbody>
+        </ng-container>
+    </table>
+</ng-template>
